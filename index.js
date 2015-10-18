@@ -97,7 +97,6 @@ function handle(text,anchor) {
         }
         root[table_name] = data;
     }
-    console.log(JSON.stringify(root))
     return JSON.stringify(root);
 }
 // Plugin level function(dealing with files)
@@ -114,6 +113,7 @@ function gulpMarkdownTableToJson(anchorText) {
         }
         if (file.isBuffer()) {
             file.contents = new Buffer(handle(file.contents.toString(),anchorText))
+            file.path = gutil.replaceExtension(file.path, '.json');
         }
         if (file.isStream()) {
             this.emit('error', new PluginError(PLUGIN_NAME, 'Streams are not supported!'));
