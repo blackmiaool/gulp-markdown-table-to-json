@@ -24,6 +24,7 @@ name | age| grade |
 Petra|15|8
 Olivia|14|7
 
+#### source code
 ```markdown
 ###### boys
 name | age| grade 
@@ -38,7 +39,7 @@ Petra|15|8
 Olivia|14|7
 ```
 
-
+Save the in your README.md file.
 ### Get Json
 ```javascript
 var md2json = require('gulp-markdown-table-to-json');
@@ -54,8 +55,29 @@ Then you will get a json file named README.json with following content:
 ```json
 {"boys":[{"name":"John","age":"11","grade":"3"},{"name":"Bob","age":"13","grade":"4"}],"girls":[{"name":"Petra","age":"15","grade":"8"},{"name":"Olivia","age":"14","grade":"7"}]}
 ```
-If you want to beautify it, you can use the gulp plugin "gulp-beautify".
-
+If you want to beautify it, you can use the gulp plugin "gulp-beautify". And you will get the following content:
+```json
+{
+    "boys": [{
+        "name": "John",
+        "age": "11",
+        "grade": "3"
+    }, {
+        "name": "Bob",
+        "age": "13",
+        "grade": "4"
+    }],
+    "girls": [{
+        "name": "Petra",
+        "age": "15",
+        "grade": "8"
+    }, {
+        "name": "Olivia",
+        "age": "14",
+        "grade": "7"
+    }]
+}
+```
 ## API
 
 ### md2json(anchor)
