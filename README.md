@@ -1,5 +1,5 @@
 # gulp-markdown-table-to-json 
-> A github style markdown table replace parse plugin for gulp 3
+> A github-style-markdown table parse plugin for gulp 3
 
 ## Usage
 
