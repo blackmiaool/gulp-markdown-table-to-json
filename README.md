@@ -1,4 +1,5 @@
 # gulp-markdown-table-to-json 
+[![NPM version][npm-image]][npm-url]
 > A github-style-markdown table parse plugin for gulp 3
 
 ## Usage
@@ -86,3 +87,11 @@ If you want to beautify it, you can use the gulp plugin "gulp-beautify". And you
 Type: `String`
 
 The string to search for table title. Default is "######".
+
+
+
+
+
+
+[npm-url]: https://npmjs.org/package/gulp-markdown-table-to-json
+[npm-image]: http://img.shields.io/npm/v/gulp-markdown-table-to-json.svg
