@@ -1,6 +1,6 @@
 {
   "name": "gulp-markdown-table-to-json",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Convert tables in markdown to json",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/blackmiaool/gulp-markdown-table-to-json.git"
   },
   "keywords": [
-    "gulpplugin"
+    "gulpplugin","markdown","json","table"
   ],
   "author": "blackmiaool <blackmiaool@gmail.com> (http://blackmiaool.com/)",
   "license": "MIT",
