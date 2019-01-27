@@ -1,6 +1,6 @@
-# gulp-markdown-table-to-json 
+# gulp-markdown-table-to-json
 [![NPM version][npm-image]][npm-url]
-> A github-style-markdown table parse plugin for gulp 3
+> A github-style-markdown table parse plugin for gulp 3/4
 
 ## Usage
 
@@ -41,6 +41,9 @@ Olivia|14|7
 ```
 
 ### Get Json
+
+Gulp 3:
+
 ```javascript
 var md2json = require('gulp-markdown-table-to-json');
 
@@ -49,6 +52,21 @@ gulp.task('md2json', function(){
     .pipe(md2json())
     .pipe(gulp.dest('.'));
 });
+```
+
+Gulp 4:
+
+```javascript
+const { src, dest, task} = require('gulp');
+const md2json = require('gulp-markdown-table-to-json');
+
+task(m2j);
+m2j.description = 'Markdown table to JSON';
+function m2j() {
+  return src('index.md')
+    .pipe(md2json())
+    .pipe(dest('.'));
+};
 ```
 
 Then you will get a json file named README.json with the following content:
