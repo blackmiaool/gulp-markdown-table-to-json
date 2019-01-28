@@ -51,8 +51,7 @@ Olivia|14|7
 ### Get Json
 
 ```javascript
-var gulp = require('gulp'),
-    md2json = require('gulp-markdown-table-to-json');
+var md2json = require('gulp-markdown-table-to-json');
 
 gulp.task('md2json', function(){
   gulp.src('README.md')
