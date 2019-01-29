@@ -1,6 +1,6 @@
 {
   "name": "gulp-markdown-table-to-json",
-  "version": "1.0.6",
+  "version": "1.1.6",
   "description": "Convert tables in markdown to json",
   "main": "index.js",
   "scripts": {
