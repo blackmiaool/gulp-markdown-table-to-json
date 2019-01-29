@@ -13,27 +13,33 @@ npm install --save-dev gulp-markdown-table-to-json
 Then, add it to your `gulpfile.js`:
 
 ### Write Some Tables in Markdown File
+
 ###### boys
+
 name | age| grade 
 -----|----|-----
 John|11|3
 Bob|13|4
 
 ###### girls
+
 name | age| grade | 
 -----|----|-----
 Petra|15|8
 Olivia|14|7
 
 #### source code
+
 ```markdown
 ###### boys
+
 name | age| grade 
 -----|----|-----
 John|11|3
 Bob|13|4
 
 ###### girls
+
 name | age| grade | 
 -----|----|-----
 Petra|15|8
@@ -45,7 +51,7 @@ Olivia|14|7
 Gulp 3:
 
 ```javascript
-var md2json = require('gulp-markdown-table-to-json');
+const md2json = require('gulp-markdown-table-to-json');
 
 gulp.task('md2json', function(){
   gulp.src('README.md')
@@ -70,10 +76,13 @@ function m2j() {
 ```
 
 Then you will get a json file named README.json with the following content:
+
 ```json
 {"boys":[{"name":"John","age":"11","grade":"3"},{"name":"Bob","age":"13","grade":"4"}],"girls":[{"name":"Petra","age":"15","grade":"8"},{"name":"Olivia","age":"14","grade":"7"}]}
 ```
-If you want to beautify it, you can use the gulp plugin "gulp-beautify". And you will get the following content:
+
+You can also use "gulp-beautify" to beautify it:
+
 ```json
 {
     "boys": [{
@@ -96,19 +105,16 @@ If you want to beautify it, you can use the gulp plugin "gulp-beautify". And you
     }]
 }
 ```
+
 ## API
 
 ### md2json(anchor)
 
 #### anchor
+
 Type: `String`
 
 The string to search for table title. Default is "######".
-
-
-
-
-
 
 [npm-url]: https://npmjs.org/package/gulp-markdown-table-to-json
 [npm-image]: http://img.shields.io/npm/v/gulp-markdown-table-to-json.svg
