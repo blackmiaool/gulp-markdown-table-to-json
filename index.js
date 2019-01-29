@@ -9,11 +9,7 @@ const PLUGIN_NAME = 'gulp-markdown-table-to-json';
 
 
 // Plugin level function(dealing with files)
-function gulpMarkdownTableToJson(anchorText) {
-
-    if (!anchorText) {
-        anchorText = "######";
-    }
+function gulpMarkdownTableToJson(anchorText = "######") {
     // Creating a stream through which each file will pass
     return through.obj(function (file, enc, cb) {
         if (file.isNull()) {
