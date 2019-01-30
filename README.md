@@ -1,6 +1,8 @@
 # gulp-markdown-table-to-json
 [![NPM version][npm-image]][npm-url]
-> A github-style-markdown table parse plugin for gulp 3/4
+> A github-style-markdown table parse plugin for gulp 3/4  
+
+Special thanks to [noraj](https://github.com/noraj)
 
 ## Usage
 
