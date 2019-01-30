@@ -9,7 +9,7 @@ const PLUGIN_NAME = 'gulp-markdown-table-to-json';
 
 
 // Plugin level function(dealing with files)
-function gulpMarkdownTableToJson(anchorText = "######") {
+function gulpMarkdownTableToJson(tableMarker = /<!-- *table2json:([^ -]+) *-->/) {
     // Creating a stream through which each file will pass
     return through.obj(function (file, enc, cb) {
         if (file.isNull()) {
@@ -17,7 +17,7 @@ function gulpMarkdownTableToJson(anchorText = "######") {
             return cb(null, file);
         }
         if (file.isBuffer()) {
-            file.contents = new Buffer(JSON.stringify(handle(file.contents.toString(), anchorText)));
+            file.contents = new Buffer(JSON.stringify(handle(file.contents.toString(), tableMarker)));
             file.path = gutil.replaceExtension(file.path, '.json');
         }
         if (file.isStream()) {

@@ -14,7 +14,7 @@ function splitTableLine(line) {
         .filter(a => a)
 }
 
-function handle(text, anchor) {
+function handle(text, tableMarker) {
     //filter empty lines and space lines
     const lines = text.split("\n").filter(line => line && line !== '' && !/^ *$/.test(line));
 
@@ -35,7 +35,7 @@ function handle(text, anchor) {
         const rows = [];
 
         //find anchor
-        while (line && line.indexOf(anchor) === -1) {
+        while (line && !tableMarker.test(line)) {
             line = readLine();
         }
 
@@ -43,7 +43,7 @@ function handle(text, anchor) {
             break;
         }
         //find table name
-        const tableName = line.split(anchor)[1].trim();
+        const tableName = line.split(tableMarker)[1].trim();
 
         line = readLine()
         assert(Boolean(line), "markdown expect table content");

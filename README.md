@@ -14,15 +14,15 @@ Then, add it to your `gulpfile.js`:
 
 ### Write Some Tables in Markdown File
 
-###### boys
-
+### Boys Table
+<!-- table2json:boys -->
 name | age| grade 
 -----|----|-----
 John|11|3
 Bob|13|4
 
-###### girls
-
+### Girls Table
+<!-- table2json:girls -->
 name | age| grade | 
 -----|----|-----
 Petra|15|8
@@ -31,15 +31,15 @@ Olivia|14|7
 #### source code
 
 ```markdown
-###### boys
-
+### Boys Table
+<!-- table2json:boys -->
 name | age| grade 
 -----|----|-----
 John|11|3
 Bob|13|4
 
-###### girls
-
+### Girls Table
+<!-- table2json:girls -->
 name | age| grade | 
 -----|----|-----
 Petra|15|8
@@ -108,13 +108,13 @@ You can also use "gulp-beautify" to beautify it:
 
 ## API
 
-### md2json(anchor)
+### md2json(tableMarker)
 
-#### anchor
+#### tableMarker
 
-Type: `String`
+Type: `RegExp`
 
-The string to search for table title. Default is "######".
+The RegExp to search for table title. Default is `/<!-- *table2json:([^ -]+) *-->/`.
 
 [npm-url]: https://npmjs.org/package/gulp-markdown-table-to-json
 [npm-image]: http://img.shields.io/npm/v/gulp-markdown-table-to-json.svg

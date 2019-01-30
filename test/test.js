@@ -6,7 +6,7 @@ const handle = require("../handle.js");
 chai.should();
 describe('handle', function () {
     it('can handle multiple tables', function (done) {
-        handle(inputText, "######").should.deep.equal({
+        handle(inputText, /<!-- *table2json:([^ -]+) *-->/).should.deep.equal({
             boys: [{
                     name: 'John',
                     age: '11',
