@@ -43,8 +43,7 @@ function handle(text, tableMarker) {
             break;
         }
         //find table name
-        const tableName = line.split(tableMarker)[1].trim();
-
+        const tableName = line.match(tableMarker)[1].trim();
         line = readLine()
         assert(Boolean(line), "markdown expect table content");
 
