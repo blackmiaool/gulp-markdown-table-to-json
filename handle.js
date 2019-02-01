@@ -16,7 +16,11 @@ const {
     nth,
     reduce,
     addIndex,
-    zipObj
+    zipObj,
+    splitWhen,
+    head,
+    fromPairs,
+    forEach
 } = require('ramda');
 
 const assert = curry(function (cond, msg) {
@@ -35,64 +39,56 @@ const getContentSplitWith = curry(function (splitter, text) {
         split(splitter),
         getContentItems)(text);
 });
+const splitOn = curry(function (pred, list) {
+    let idx = 0;
+    const len = list.length;
+    let lastArray = [];
+    const ret = [];
 
+    while (idx < len) {
+        const value = list[idx++];
+        if (pred(value)) {
+            lastArray = [value];
+            ret.push(lastArray);
+        } else {
+            lastArray.push(value);
+        }
+    }
+
+    return ret;
+});
+const testSplitter=test(/\|/);
 const splitOneTableLine = getContentSplitWith('|');
-
-const hasContent = complement(either(isEmpty, isNil));
-const isReallyEmpty = either(isEmpty, isNil);
 
 function handle(text, tableMarker) {
     //filter empty lines and space lines
-    const lines = getContentSplitWith('\n')(text);
+    const lines = split('\n')(text);
 
-    let line = "";
-    const readLine = (function () {
-        let lineIndex = 0;
-        return function () {
-            return lines[lineIndex++];
-        }
-    })();
+    
+    //get table blocks
+    const blocks = splitOn(test(tableMarker), lines)
+        .map(pipe(addIndex(splitWhen)((v, i) => {
+            return and(i > 2 , complement(testSplitter)(v))
+        }), head));
+    
+    forEach((block)=>{
+        assert(testSplitter(block[1]))("markdown expect column names");
+        assert(testSplitter(block[2]))("markdown expect table spliter(|---|---|)");
+    })(blocks);
 
-    const root = {};
-    line = readLine();
+    const findTableName = pipe(match(tableMarker), nth(1), trim);
 
-    //each loop find one table
-    while (true) {
-        const rows = [];
-
-        const hasTableMarket = test(tableMarker);
-        //find anchor
-        while (both(hasContent, complement(hasTableMarket))(line)) {
-            line = readLine();
-        }
-
-        if (isReallyEmpty(line)) {
-            break;
-        }
-        //find table name
-        const tableName = pipe(match(tableMarker), nth(1), trim)(line);
-        line = readLine()
-        assert(Boolean(line))("markdown expect table content");
-
+    const root = fromPairs(map((block) => {
         //find table header
-        const columnNames = splitOneTableLine(line);
-
-        assert(hasContent(columnNames))("markdown expect column title");
-
-        //pass |--|--|--| line
-        line = readLine();
-        assert(Boolean(line))("markdown expect table spliter");
+        const columnNames = splitOneTableLine(block[1]);
 
         //find table content
-        line = readLine();
-        while (both(hasContent, test(/\|/))(line)) {
-            rows.push(splitOneTableLine(line));
-            line = readLine()
-        }
+        rows = block.slice(3).map(splitOneTableLine);
 
-        //write the table into root
-        root[tableName] = map(zipObj(columnNames))(rows);
-    }
+        //combine rows with columnNames
+        return [pipe(head, findTableName)(block), map(zipObj(columnNames))(rows)];
+    })(blocks));
+
     return root;
 }
 module.exports = handle;
